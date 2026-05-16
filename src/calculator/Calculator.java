@@ -14,7 +14,7 @@ class Calculator extends JFrame implements ActionListener {
     }
 
     public static void main(String args[]) {
-        frame = new JFrame("calculator");
+        frame = new JFrame("Calculator");
 
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -25,8 +25,14 @@ class Calculator extends JFrame implements ActionListener {
         Calculator calc = new Calculator();
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        lable = new JTextField(16);
+        // Use BorderLayout for the main frame to separate the display and the keypad
+        frame.setLayout(new BorderLayout());
+
+        lable = new JTextField();
         lable.setEditable(false);
+        lable.setHorizontalAlignment(JTextField.RIGHT); // Align text to the right like a real calculator
+        lable.setPreferredSize(new Dimension(200, 50)); // Give the text field some height
+        lable.setFont(new Font("Arial", Font.BOLD, 20)); // Make the font larger
 
         JButton btn0, btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btna, btns, btnd, btnm, btne, btneq, btneq1;
 
@@ -49,8 +55,6 @@ class Calculator extends JFrame implements ActionListener {
         btneq = new JButton("C");
         btne = new JButton(".");
 
-        JPanel p = new JPanel();
-
         btnm.addActionListener(calc);
         btnd.addActionListener(calc);
         btns.addActionListener(calc);
@@ -69,24 +73,50 @@ class Calculator extends JFrame implements ActionListener {
         btneq.addActionListener(calc);
         btneq1.addActionListener(calc);
 
-        p.add(lable);
-        p.add(btna);
-        p.add(btn1);
-        p.add(btn2);
-        p.add(btn3);
-        p.add(btns);
-        p.add(btn4);
-        p.add(btn5);
-        p.add(btn6);
-        p.add(btnm);
+        // Create a panel specifically for the buttons using GridLayout (5 rows, 4 columns, 5px gaps)
+        JPanel p = new JPanel();
+        p.setLayout(new GridLayout(5, 4, 5, 5));
+        p.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // Add some padding around the edges
+
+        // Row 1
+        p.add(btneq); // C
+        p.add(new JLabel("")); // Empty space for alignment
+        p.add(new JLabel("")); // Empty space for alignment
+        p.add(btnd); // /
+
+
+
+
+
+        p.setBackground(Color.DARK_GRAY); // Dark background behind the buttons (making a mess or conflict merge)
+
+        // Row 2
         p.add(btn7);
         p.add(btn8);
         p.add(btn9);
-        p.add(btnd);
-        p.add(btne);
+        p.add(btnm); // *
+
+        // Row 3
+        p.add(btn4);
+        p.add(btn5);
+        p.add(btn6);
+        p.add(btns); // -
+
+        // Row 4
+        p.add(btn1);
+        p.add(btn2);
+        p.add(btn3);
+        p.add(btna); // +
+
+        // Row 5
+        p.add(new JLabel("")); // Empty space
         p.add(btn0);
-        p.add(btneq);
-        p.add(btneq1);
+        p.add(btne); // .
+        p.add(btneq1); // =
+
+        // Add the display to the top (NORTH) and buttons to the middle (CENTER)
+        frame.add(lable, BorderLayout.NORTH);
+        frame.add(p, BorderLayout.CENTER);
 
         p.setBackground(Color.blue);
         frame.add(p);
