@@ -88,7 +88,7 @@ class Calculator extends JFrame implements ActionListener {
         p.add(btneq);
         p.add(btneq1);
 
-        p.setBackground(Color.red);
+        p.setBackground(Color.blue);
         frame.add(p);
         frame.setSize(200, 220);
         frame.show();
