@@ -118,9 +118,10 @@ class Calculator extends JFrame implements ActionListener {
         frame.add(lable, BorderLayout.NORTH);
         frame.add(p, BorderLayout.CENTER);
 
-        frame.setSize(300, 400); // Give it a better starting size
-        frame.setMinimumSize(new Dimension(250, 350)); // Prevent it from shrinking too small
-        frame.setVisible(true); // Replaced deprecated show()
+        p.setBackground(Color.blue);
+        frame.add(p);
+        frame.setSize(200, 220);
+        frame.show();
     }
 
     public void actionPerformed(ActionEvent e) {
